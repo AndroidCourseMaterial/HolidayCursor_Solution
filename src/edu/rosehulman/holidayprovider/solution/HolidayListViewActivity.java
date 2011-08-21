@@ -9,5 +9,7 @@ public class HolidayListViewActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        
+        UsNationalHolidays.populateUsNationalHolidays(this);
     }
 }

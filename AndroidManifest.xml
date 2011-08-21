@@ -11,8 +11,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+		<provider
+			android:name=".HolidayProvider"
+			android:authorities="edu.rosehulman.provider.Holidays" />
     </application>
-    <uses-sdk android:minSdkVersion="8" />
-
 </manifest> 
