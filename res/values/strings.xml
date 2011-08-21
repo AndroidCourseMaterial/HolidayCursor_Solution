@@ -3,6 +3,10 @@
     <string name="field_1">Field 1</string>
     <string name="field_2">Field 2</string>
     <string name="field_3">Field 3</string>
+    <string name="field_4">Field 4</string>
+    <string name="field_5">Field 5</string>
+    <string name="field_6">Field 6</string>
+    <string name="field_7">Field 7</string>
     <string name="no_holidays_to_display">No holidays to display</string>
     <string name="restore_defaults">Restore Defaults</string>
     <string name="add_holiday">Add Holiday</string>

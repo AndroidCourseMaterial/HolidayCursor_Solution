@@ -26,8 +26,6 @@ public class HolidayListViewActivity extends ListActivity {
 		setContentView(R.layout.holiday_list_view_activity);
 
 		UsNationalHolidays.populateUsNationalHolidays(this);
-		
-		ContentResolver cr = this.getContentResolver();
 		Uri uri = HolidayProviderMetaData.HolidayTableMetaData.CONTENT_URI;
 
 		Cursor holidayCursor = this.managedQuery(uri, 
@@ -36,13 +34,25 @@ public class HolidayListViewActivity extends ListActivity {
 				null, //selectionArgs, 
 				null); //sortOrder
 		
-		int viewResourceId = R.layout.row_with_2_items;
-
-		String[] fromColumns = new String[] { 
+		int viewResourceId = R.layout.row_with_7_items;
+		String[] fromColumns = new String[] {
+				HolidayProviderMetaData.HolidayTableMetaData._ID, 
 				HolidayProviderMetaData.HolidayTableMetaData.HOLIDAY, 
-				//HolidayProviderMetaData.HolidayTableMetaData.MONTH, 
-				HolidayProviderMetaData.HolidayTableMetaData.OCCURS_ON};
-		int[] toTextViews = new int[] { R.id.textView1, R.id.textView2};
+				HolidayProviderMetaData.HolidayTableMetaData.MONTH, 
+				HolidayProviderMetaData.HolidayTableMetaData.DAY_IN_MONTH, 
+				HolidayProviderMetaData.HolidayTableMetaData.SAME_DAY_EVERY_YEAR,
+				HolidayProviderMetaData.HolidayTableMetaData.OCCURS_ON, 
+				HolidayProviderMetaData.HolidayTableMetaData.APPROX_ORDINAL_DATE
+				};
+		int[] toTextViews = new int[] { 
+				R.id.textView1, 
+				R.id.textView2, 
+				R.id.textView3, 
+				R.id.textView4, 
+				R.id.textView5, 
+				R.id.textView6, 
+				R.id.textView7
+				};
 		SimpleCursorAdapter holidayAdapter = new SimpleCursorAdapter(this, viewResourceId, 
 				holidayCursor, fromColumns, toTextViews);
 		setListAdapter(holidayAdapter);  // Magic function for a ListActivity to set the adapter
