@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, HolidayListViewActivity!</string>
+    <string name="field_1">Field 1</string>
+    <string name="field_2">Field 2</string>
+    <string name="field_3">Field 3</string>
+    <string name="no_holidays_to_display">No holidays to display</string>
+    <string name="restore_defaults">Restore Defaults</string>
+    <string name="add_holiday">Add Holiday</string>
     <string name="app_name">Holidays</string>
 </resources>

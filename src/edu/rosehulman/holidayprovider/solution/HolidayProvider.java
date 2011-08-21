@@ -25,9 +25,11 @@ public class HolidayProvider extends ContentProvider
 		sHolidaysProjectionMap = new HashMap<String, String>();
 		sHolidaysProjectionMap.put(HolidayProviderMetaData.HolidayTableMetaData._ID, HolidayProviderMetaData.HolidayTableMetaData._ID);
 		sHolidaysProjectionMap.put(HolidayProviderMetaData.HolidayTableMetaData.HOLIDAY, HolidayProviderMetaData.HolidayTableMetaData.HOLIDAY);
+		sHolidaysProjectionMap.put(HolidayProviderMetaData.HolidayTableMetaData.MONTH, HolidayProviderMetaData.HolidayTableMetaData.MONTH);
 		sHolidaysProjectionMap.put(HolidayProviderMetaData.HolidayTableMetaData.DAY_IN_MONTH, HolidayProviderMetaData.HolidayTableMetaData.DAY_IN_MONTH);
 		sHolidaysProjectionMap.put(HolidayProviderMetaData.HolidayTableMetaData.SAME_DAY_EVERY_YEAR, HolidayProviderMetaData.HolidayTableMetaData.SAME_DAY_EVERY_YEAR);
 		sHolidaysProjectionMap.put(HolidayProviderMetaData.HolidayTableMetaData.OCCURS_ON, HolidayProviderMetaData.HolidayTableMetaData.OCCURS_ON);
+		sHolidaysProjectionMap.put(HolidayProviderMetaData.HolidayTableMetaData.APPROX_ORDINAL_DATE, HolidayProviderMetaData.HolidayTableMetaData.APPROX_ORDINAL_DATE);
 	}
 	private static final UriMatcher sUriMatcher;
 	private static final int INCOMING_URI_INDICATOR_HOLIDAYS = 1;
@@ -58,7 +60,9 @@ public class HolidayProvider extends ContentProvider
 			s.append(HolidayProviderMetaData.HolidayTableMetaData.SAME_DAY_EVERY_YEAR);
 			s.append(" INTEGER, ");
 			s.append(HolidayProviderMetaData.HolidayTableMetaData.OCCURS_ON);
-			s.append(" TEXT)");
+			s.append(" TEXT, ");
+			s.append(HolidayProviderMetaData.HolidayTableMetaData.APPROX_ORDINAL_DATE);
+			s.append(" INTEGER)");
 			CREATE_STATEMENT = s.toString();
 		}
 		
@@ -68,11 +72,7 @@ public class HolidayProvider extends ContentProvider
 
 		@Override
 		public void onCreate(SQLiteDatabase db) {
-			Log.d(TAG, "HolidayProvider onCreate " + CREATE_STATEMENT);
-			Log.d(TAG, "HolidayProvider onCreate " + DROP_STATEMENT);
-			Log.d(TAG, "Here comes the crash");
 			db.execSQL(CREATE_STATEMENT);
-			Log.d(TAG, "I never make it this far");
 		}
 
 		@Override
@@ -144,7 +144,7 @@ public class HolidayProvider extends ContentProvider
 	}
 
 	private static final String DEFAULT_MONTH = "January";
-	private static final String DEFAULT_DAY_IN_MONTH = "1";
+	private static final String DEFAULT_DAY_IN_MONTH = "0";
 		
 	@Override
 	public Uri insert(Uri uri, ContentValues initialValues) {
@@ -174,7 +174,10 @@ public class HolidayProvider extends ContentProvider
 			throw new SQLException("Failed to insert row because SAME_DAY_EVERY_YEAR is needed " + uri);
 		}
 		if (values.containsKey(HolidayProviderMetaData.HolidayTableMetaData.OCCURS_ON) == false) {
-			throw new SQLException("Failed to insert row because HOLIDAY is needed " + uri);
+			throw new SQLException("Failed to insert row because OCCURS_ON is needed " + uri);
+		}
+		if (values.containsKey(HolidayProviderMetaData.HolidayTableMetaData.APPROX_ORDINAL_DATE) == false) {
+			throw new SQLException("Failed to insert row because APPROX_ORDINAL_DATE is needed " + uri);
 		}
 
 		SQLiteDatabase db = mOpenHelper.getWritableDatabase();

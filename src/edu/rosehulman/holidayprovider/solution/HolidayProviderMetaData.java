@@ -17,8 +17,6 @@ public class HolidayProviderMetaData {
 		private HolidayTableMetaData() {}
 		public static final String TABLE_NAME = "us_national_holidays";
 
-		public static final String DEFAULT_SORT_ORDER = _ID + " DESC";
-
 		//uri and mime type definitions
 		public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + TABLE_NAME);
 		public static final Uri CONTENT_ID_URI_BASE = Uri.parse("content://" + AUTHORITY + "/" + TABLE_NAME +"/");
@@ -31,5 +29,9 @@ public class HolidayProviderMetaData {
 		public static final String DAY_IN_MONTH = "day_in_month";
 		public static final String SAME_DAY_EVERY_YEAR = "same_day_every_year";
 		public static final String OCCURS_ON = "occurs_on";	
+		public static final String APPROX_ORDINAL_DATE = "approx_ordinal_date";	
+
+		public static final String DEFAULT_SORT_ORDER = APPROX_ORDINAL_DATE + " ASC";
+		//public static final String DEFAULT_SORT_ORDER = _ID + " DESC";
 	}
 }
